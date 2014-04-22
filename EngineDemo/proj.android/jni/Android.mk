@@ -9,6 +9,7 @@ LOCAL_SRC_FILES := main.cpp \
                    ../../Classes/AppDelegate.cpp\
                    ../../Classes/C3DActor.cpp \
                    ../../Classes/C3DBaseActor.cpp \
+				   ../../Classes/CarDemo/CarTestLayer.cpp \
                    ../../Classes/MainLayer.cpp \
                    ../../Classes/VisibleRect.cpp \
                    ../../Classes/AnimLightTest/AnimLightTestLayer.cpp \
