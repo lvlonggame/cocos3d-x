@@ -4,7 +4,11 @@ As you can see here, we have created a 3D engine for mobile games, called it coc
 
 We're doing this, merging 3D features from this repository into github.com/cocos2d/cocos2d-x repo, so we will eventually have one engine for both 2D and 3D games.
 
-<img src="http://b277.photo.store.qq.com/psb?/V149io673qGalT/W6cXcz9sTIkPXptO4G5cIUM2r88IoXP8jIhqI4LpW7M!/b/dJ8QJKWVFQAA&bo=IAPgAQAAAAADAOc!" width=800 height = 480>
+<img src="http://b278.photo.store.qq.com/psb?/V149io673qGalT/afLO8XvfWa9sgZlisgr9FzM8U49zW68a5v0x*HrUn1Q!/b/dMGmvKVaDAAA&bo=wAOAAgAAAAADAGQ!" width=800 height = 480>
+  
+  
+  
+  
   
 ### Supported Platforms
 
