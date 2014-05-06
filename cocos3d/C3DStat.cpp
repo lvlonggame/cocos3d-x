@@ -20,25 +20,35 @@ namespace cocos3d
         return &instance;
     }
 
-void C3DStat::beginStat()
+	void C3DStat::beginStat()
     {
         _nTriangleDraw = 0;
         _nTriangleTotal = 0;
         _nDrawCall = 0;
         _bStart = _bEnable;
     }
-void C3DStat::endStat()
+
+	void C3DStat::endStat()
     {
         _bStart = false;
+
+	//	CC_INCREMENT_GL_DRAWN_BATCHES_AND_VERTICES(_nDrawCall, _nTriangleDraw);
+
+		cocos2d::Renderer* render = cocos2d::Director::getInstance()->getRenderer();                                  
+         
+        render->addDrawnBatches(_nDrawCall);                  
+        render->addDrawnVertices(_nTriangleDraw);                  
+   
     }
 
-void C3DStat::setStatEnable(bool bEnable)
+	void C3DStat::setStatEnable(bool bEnable)
     {
         if (_bEnable == bEnable)
             return;
 
         _bEnable = bEnable;
     }
+
 
 ////////////////////////////////Implement of C3DStatRender//////////////////////////////////////////
 C3DStatRender::C3DStatRender(cocos2d::CCNode* parent, float statfont):_parent(parent), _fontSize(statfont), _UpdateInterval(200), _UpdateIntervalAcc(0)
@@ -56,7 +66,7 @@ C3DStatRender::C3DStatRender(cocos2d::CCNode* parent, float statfont):_parent(pa
 	_DrawCallLabel->retain();
 
 	cocos2d::CCSize size = _parent->getContentSize();
-	setStatLabelPos(cocos2d::CCPoint(size.width - _fontSize * 10, size.height - _fontSize * 3));
+	setStatLabelPos(cocos2d::CCPoint(size.width*0.5f - _fontSize * 10, size.height*0.5f - _fontSize * 3));
 }
 C3DStatRender::~C3DStatRender()
 {
@@ -119,4 +129,5 @@ void C3DStatRender::update(long elapsedTime)
 		_TriangleTotalLabel->setString(str);
 	}
 }
+
 }
