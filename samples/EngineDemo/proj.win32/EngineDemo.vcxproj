@@ -125,7 +125,7 @@
     <OutDir>$(SolutionDir)$(Configuration).win32\</OutDir>
     <IntDir>$(Configuration).win32\</IntDir>
     <EmbedManifest>false</EmbedManifest>
-    <IncludePath>../../cocos2dx/cocos/2d;../../cocos2dx/cocos/base;../../cocos2dx/cocos/2d/platform/desktop;../../cocos2dx/cocos/2d/platform/win32;../../cocos2dx/external/win32-specific/gles/include/OGLES;../../cocos2dx/cocos/math/kazmath;../../cocos2dx/cocos/physics;../../cocos2dx/external\glfw3\include\win32;$(IncludePath)</IncludePath>
+    <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -138,7 +138,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;COCOS2D_DEBUG=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\cocos3d;$(ProjectDir)..\..\cocos2dx\cocos;$(ProjectDir)..\..\cocos2dx\cocos\base;$(ProjectDir)..\..\cocos2dx\cocos\math\kazmath;$(ProjectDir)..\..\external\chipmunk\include\chipmunk;$(ProjectDir)..\..\cocos2dx\cocos\physics;$(ProjectDir)..\..\cocos2dx\cocos\2d;$(ProjectDir)..\..\cocos2dx\cocos\gui;$(ProjectDir)..\..\cocos2dx\cocos\2d\render;$(ProjectDir)..\..\cocos2dx\cocos\2d\platform\desktop;$(ProjectDir)..\..\cocos2dx\cocos\2d\platform\win32;$(ProjectDir)..\..\external\glfw3\include\win32;$(ProjectDir)..\..\external\win32-specific\gles\include\OGLES;..\Classes;..\vld\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\cocos3dx;$(ProjectDir)..\..\..\cocos2dx\cocos;$(ProjectDir)..\..\..\cocos2dx\cocos\base;$(ProjectDir)..\..\..\cocos2dx\cocos\math\kazmath;$(ProjectDir)..\..\..\cocos2dx\cocos\physics;$(ProjectDir)..\..\..\cocos2dx\cocos\2d;$(ProjectDir)..\..\..\cocos2dx\cocos\gui;$(ProjectDir)..\..\..\cocos2dx\cocos\2d\render;$(ProjectDir)..\..\..\cocos2dx\cocos\2d\platform\desktop;$(ProjectDir)..\..\..\cocos2dx\cocos\2d\platform\win32;$(ProjectDir)..\..\..\cocos2dx\external\chipmunk\include\chipmunk;$(ProjectDir)..\..\..\cocos2dx\external\glfw3\include\win32;$(ProjectDir)..\..\..\cocos2dx\external\win32-specific\gles\include\OGLES;..\Classes;..\vld\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
