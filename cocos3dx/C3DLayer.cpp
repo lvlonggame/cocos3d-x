@@ -50,7 +50,7 @@ C3DLayer::C3DLayer()
 
     _2DState = NULL;
 
-	_statRender = NULL;
+	//_statRender = NULL;
 
 	_spriteManager = NULL;
 }
@@ -90,6 +90,8 @@ bool C3DLayer::init3D()
         shutdown();
         return false;
     }
+
+	C3DStat::getInstance()->setStatEnable(true);
 
     return true;
 }
@@ -161,7 +163,7 @@ void C3DLayer::initialize()
 
     _initialized = true;
 
-	_statRender = new C3DStatRender(this);
+	//_statRender = new C3DStatRender(this);
 
 	_totalTimeSceond = 0.0f;
 	_delatTimeSceond = 0.0f;
@@ -170,7 +172,7 @@ void C3DLayer::initialize()
 
 void C3DLayer::finalize()
 {
-	SAFE_DELETE(_statRender);
+	//SAFE_DELETE(_statRender);
 
     SAFE_DELETE(_scene);
 }
@@ -258,7 +260,7 @@ void C3DLayer::update(long elapsedTime)
         _renderSystem->update(elapsedTime);
     }
 
-	_statRender->update(elapsedTime);
+	//_statRender->update(elapsedTime);
     END_PROFILE("3dlayer update");
 }
 
