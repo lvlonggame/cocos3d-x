@@ -159,7 +159,7 @@ RenderChannelManager::RenderChannelManager()
 {
 	_channels[CN_Background].setSortType( C3DRenderChannel::ST_Less );
 	_channels[CN_Background].setName( ChannelBackground );
-	_channels[CN_Opacity].setSortType( C3DRenderChannel::ST_None );
+	_channels[CN_Opacity].setSortType( C3DRenderChannel::ST_Less );
 	_channels[CN_Opacity].setName( ChannelOpacity );
 	_channels[CN_Transparency].setSortType( C3DRenderChannel::ST_Greater );
 	_channels[CN_Transparency].setName( ChannelTransparency );
