@@ -85,6 +85,7 @@ namespace cocos3d
         bool _bEnable; // enable stat or not
     };
 
+
 	class C3DStatRender
 	{
 	public:
@@ -98,10 +99,7 @@ namespace cocos3d
 
 		void setStatLabelPos(const cocos2d::Point& pt);
 
-		/**
-         * update label string
-		 */
-        void update(long elapsedTime);
+        void update(long elapsedTime); //update label string
 
 	private:
 

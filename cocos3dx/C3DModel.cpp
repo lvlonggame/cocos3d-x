@@ -681,13 +681,25 @@ void C3DModel::channelDrawPart( int partIndex )
 	C3DMaterial* material = getMaterial(partIndex);
 	MeshPart* meshPart = _mesh->getPart(partIndex);
 
+	bool bStatEnable = C3DStat::getInstance()->isStatEnable();
+
 	if (material)
 	{
 		C3DTechnique* technique = material->getTechnique(techUsage);
 		unsigned int passCount = technique->getPassCount();
 
+		if (bStatEnable)
+		{
+			C3DStat::getInstance()->incDrawCall(passCount);
+		}
+
 		for (unsigned int j = 0; j < passCount; ++j)
 		{
+			if (bStatEnable)
+			{
+				C3DStat::getInstance()->incTriangleDraw(meshPart->getTriangleCount());
+			}
+
 			C3DPass* pass = technique->getPass(j);
 			//applyLightParam(pass);
 			//applyShadowMap(pass);

@@ -84,6 +84,8 @@ bool FullDemoLayer::init()
 	//setUpShadowMap();
 
     setUpScene();
+
+	
     return r;
 }
 

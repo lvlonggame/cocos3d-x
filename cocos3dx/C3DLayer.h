@@ -176,7 +176,7 @@ protected:
 	float _oldClearColor[4];
 
 	C3DEnvConf _envConfig;       //environment configuration
-	C3DStatRender* _statRender; // statistics info render
+	//C3DStatRender* _statRender; // statistics info render
 
 	C3DRenderNodeManager* _spriteManager;
 
