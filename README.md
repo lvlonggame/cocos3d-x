@@ -4,6 +4,8 @@ As you can see here, we have created a 3D engine for mobile games, called it coc
 
 We're doing this, merging 3D features from this repository into github.com/cocos2d/cocos2d-x repo, so we will eventually have one engine for both 2D and 3D games.
 
+You can get the code of cocos2d-x through "submodule update".
+
 <img src="http://b278.photo.store.qq.com/psb?/V149io673qGalT/afLO8XvfWa9sgZlisgr9FzM8U49zW68a5v0x*HrUn1Q!/b/dMGmvKVaDAAA&bo=wAOAAgAAAAADAGQ!" width=800 height = 480>
   
   
@@ -129,4 +131,4 @@ We're doing this, merging 3D features from this repository into github.com/cocos
    * fbx sdk : http://blog.sina.com.cn/s/blog_4a657c5a01014da9.html
    * soft shadow : http://blog.sina.com.cn/s/blog_4a657c5a0100w8il.html   * 
    * opengl render optimize : http://blog.sina.com.cn/s/blog_4a657c5a01015tyo.html   * 
-   * Gimbal Lock ï¼š http://blog.sina.com.cn/s/blog_4a657c5a0100w6sb.html
+   * Gimbal Lock ï¼?http://blog.sina.com.cn/s/blog_4a657c5a0100w6sb.html
