@@ -77,9 +77,9 @@ def do_build(cocos_root, ndk_root, app_android_root, ndk_build_param,sdk_root,an
     # windows should use ";" to seperate module paths
     platform = sys.platform
     if platform == 'win32':
-        ndk_module_path = 'NDK_MODULE_PATH=%s;%s/cocos2dx/external;%s/cocos2dx/cocos;%s/cocos3d' % (cocos_root, cocos_root, cocos_root, cocos_root)
+        ndk_module_path = 'NDK_MODULE_PATH=%s;%s/cocos2dx/external;%s/cocos2dx/cocos;%s/cocos3dx' % (cocos_root, cocos_root, cocos_root, cocos_root)
     else:
-        ndk_module_path = 'NDK_MODULE_PATH=%s:%s/cocos2dx/external:%s/cocos2dx/cocos;%s/cocos3d' % (cocos_root, cocos_root, cocos_root, cocos_root)
+        ndk_module_path = 'NDK_MODULE_PATH=%s:%s/cocos2dx/external:%s/cocos2dx/cocos;%s/cocos3dx' % (cocos_root, cocos_root, cocos_root, cocos_root)
 
     num_of_cpu = get_num_of_cpu()
     if ndk_build_param == None:
@@ -150,7 +150,7 @@ def build_samples(target, ndk_build_param, android_platform, build_mode):
         build_mode = 'debug'
 
     if target == 'EngineDemo':
-        app_android_root = os.path.join(cocos_root, 'EngineDemo/proj.android')
+        app_android_root = os.path.join(cocos_root, 'samples/EngineDemo/proj.android')
     else:
         app_android_root = os.path.join(cocos_root, "projects/" + target +"/proj.android")
 

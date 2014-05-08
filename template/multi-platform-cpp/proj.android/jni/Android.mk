@@ -13,7 +13,7 @@ LOCAL_SRC_FILES := src/main.cpp \
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 
 LOCAL_CFLAGS    := -D__ANDROID__\
-                   -I"$(LOCAL_PATH)/../../../../cocos3d" \
+                   -I"$(LOCAL_PATH)/../../../../cocos3dx" \
 
 LOCAL_CPPFLAGS := -std=c++11 -pthread -frtti -fexceptions
 
@@ -24,4 +24,4 @@ LOCAL_LDLIBS :=  -landroid -lEGL -lGLESv2
 include $(BUILD_SHARED_LIBRARY)
 
 $(call import-module,2d) 
-$(call import-module,cocos3d) 
+$(call import-module,cocos3dx) 

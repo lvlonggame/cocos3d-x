@@ -56,17 +56,14 @@
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>../../../cocos2dx/cocos/2d;../../../cocos2dx/cocos/base;../../../cocos2dx/cocos/2d/platform/desktop;../../../cocos2dx/cocos/2d/platform/win32;../../../cocos2dx/external/win32-specific/gles/include/OGLES;../../../cocos2dx/cocos/math/kazmath;../../../cocos2dx/cocos/physics;../../../cocos2dx/external\glfw3\include\win32;$(IncludePath)</IncludePath>
-  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LibraryPath>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\cocos\2d;$(ProjectDir)..\..\..\cocos\2d\platform\win32;$(ProjectDir)..\..\..\cocos\physics;$(ProjectDir)..\..\..\cocos\base;$(ProjectDir)..\..\..\cocos\math\kazmath;$(ProjectDir)..\..\..\CocosDenshion\include;$(ProjectDir)..\..\..\cocos3d;$(ProjectDir)..\..\..\external\glfw3\include\win32;$(ProjectDir)..\..\..\external\win32-specific\gles\include\OGLES;..\Classes;..\vld\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\cocos3dx;$(ProjectDir)..\..\..\cocos2dx\cocos;$(ProjectDir)..\..\..\cocos2dx\cocos\2d;$(ProjectDir)..\..\..\cocos2dx\cocos\2d\platform\win32;$(ProjectDir)..\..\..\cocos2dx\cocos\physics;$(ProjectDir)..\..\..\cocos2dx\cocos\base;$(ProjectDir)..\..\..\cocos2dx\cocos\math\kazmath;$(ProjectDir)..\..\..\cocos2dx\CocosDenshion\include;$(ProjectDir)..\..\..\cocos2dx\external\glfw3\include\win32;$(ProjectDir)..\..\..\cocos2dx\external\win32-specific\gles\include\OGLES;..\Classes;..\vld\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;COCOS2D_DEBUG=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>

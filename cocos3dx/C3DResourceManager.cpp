@@ -1,0 +1,170 @@
+/****************************************************************************
+Copyright (c) Chukong Technologies Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+****************************************************************************/
+
+#include "C3DResourceManager.h"
+#include "C3DResource.h"
+#include "C3DResourcePool.h"
+#include "Base.h"
+
+namespace cocos3d
+{
+C3DResourceManager::C3DResourceManager():_memoryUsage(0)
+{
+	_usedPool = new C3DUsedResourcePool(this);
+	_waitPool = new C3DWaitResourcePool(this);
+
+	_intervalCheckTime = 1000;
+	_checkTime = 0;
+}
+
+C3DResourceManager::~C3DResourceManager()
+{
+	removeAll();
+
+	SAFE_DELETE(_usedPool);
+	SAFE_DELETE(_waitPool);
+}
+
+C3DResource* C3DResourceManager::findResource(const std::string& name)
+{
+	C3DResource* res = NULL;
+	res = _usedPool->getItem(name);
+	if(res == NULL)
+		res = _waitPool->getItem(name);
+	return  res;
+}
+
+bool C3DResourceManager::load(const std::string& name)
+{
+    return false;
+}
+
+void C3DResourceManager::addResource( C3DResource* res )
+{
+	if(res->getState() == C3DResource::State_Used)
+	{
+		_usedPool->addItem(res);
+	}
+	else if(res->getState() == C3DResource::State_Wait)
+	{
+		_waitPool->addItem(res);
+	}
+}
+
+C3DResource* C3DResourceManager::getResource(const std::string& name)
+{
+	C3DResource* resource = findResource(name);
+	if(resource != NULL)
+    {
+		return cloneResource(resource);
+    }
+    else
+	{
+		return createResource(name);
+	}
+}
+
+void C3DResourceManager::removeResource(C3DResource* res)
+{
+	if(res == NULL)
+		return;
+
+	if(res->getState() == C3DResource::State_Used)
+	{
+		_usedPool->removeItem(res->getID());
+	}
+	else if(res->getState() == C3DResource::State_Wait)
+	{
+		_waitPool->removeItem(res->getID());
+	}
+}
+
+void C3DResourceManager::removeResource(const std::string& name)
+{
+	C3DResource* res = findResource(name);
+
+	if (res)
+	{
+		this->removeResource(res);
+	}
+}
+
+void C3DResourceManager::removeAll(void)
+{
+	if(_usedPool != NULL)
+		_usedPool->clear();
+
+	if(_waitPool != NULL)
+		_waitPool->clear();
+}
+
+void C3DResourceManager::setResourceState(C3DResource* res,C3DResource::State state )
+{
+	if(res->getState() == state)
+	{
+		return;
+	}
+	else
+	{
+		res->retain();
+		if(res->getState()==C3DResource::State_Init && state==C3DResource::State_Used)
+		{
+			_usedPool->addItem(res);
+		}
+
+		if(res->getState()==C3DResource::State_Used && state==C3DResource::State_Wait)
+		{
+			_usedPool->removeItem(res->getID());
+			_waitPool->addItem(res);
+		}
+		else if(res->getState()==C3DResource::State_Wait && state==C3DResource::State_Used)
+		{
+			_waitPool->removeItem(res->getID());
+			_usedPool->addItem(res);
+		}
+		res->setState(state);
+		res->release();
+	}
+}
+
+void C3DResourceManager::update(long elapsedTime)
+{
+	_checkTime += elapsedTime;
+	if(_checkTime > _intervalCheckTime)
+	{
+		_checkTime = 0;
+
+		if(_usedPool != NULL)
+			_usedPool->update(elapsedTime);
+
+		if(_waitPool != NULL)
+			_waitPool->update(elapsedTime);
+	}
+}
+
+void C3DResourceManager::reload()
+{
+	_usedPool->reload();
+	_waitPool->reload();
+}
+
+}

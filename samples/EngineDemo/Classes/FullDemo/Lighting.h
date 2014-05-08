@@ -1,0 +1,77 @@
+/****************************************************************************
+Copyright (c) Chukong Technologies Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+****************************************************************************/
+
+#ifndef LIGHTING_H
+#define LIGHTING_H
+
+#include "BaseBullet.h"
+
+namespace cocos2d
+{
+class LightingBullet : public BaseBullet
+{
+public:
+
+#define MAX_TARGET_NUM	3
+
+public:
+
+	LightingBullet(std::string& name,cocos3d::C3DNode* node,cocos3d::C3DLayer* layer);
+	virtual ~LightingBullet();
+
+	bool addTargets( C3DActor* target )
+	{
+		for ( int i = 0; i < MAX_TARGET_NUM; ++i )
+		{
+			if ( _targets[i] == NULL )
+			{
+				_targets[i] = target;
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+protected:
+
+	virtual void onSpell(void);
+	virtual void onFly(void);
+	virtual void onHit(void);
+	virtual void onFinish(void);
+
+	virtual void stateSpell(long elapsedTime);
+	virtual void stateFly(long elapsedTime);
+	virtual void stateHit(long elapsedTime);
+	virtual void stateFinish(long elapsedTime);
+
+private:
+	cocos3d::C3DLineRender* _lighting;
+	C3DActor* _targets[MAX_TARGET_NUM];
+	unsigned int _curTargetID;
+	float _flyTime;
+	float _maxFlyTime;
+	float _spellDelty;
+};
+}	// namespace cocos2d
+
+#endif	// #define LIGHTING_H
