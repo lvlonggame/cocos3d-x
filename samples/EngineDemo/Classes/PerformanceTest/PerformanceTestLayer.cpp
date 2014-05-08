@@ -103,16 +103,12 @@ void PerformanceTestLayer::setUpScene()
 {
     C3DSprite* sm = static_cast<cocos3d::C3DSprite*>(C3DRenderNodeManager::getInstance()->getResource("demores/haigui/haigui.ckb"));
     sm->addAnimationClip("all", 0 , 240, 0, 1.0f);
-    sm->setPosition(-50, -50, 0);
     sm->playAnimationClip("all");
-    _scene->addChild(sm);
+
     for (int i = 0; i < 10; i++)
     {
 		for (int j = 0; j < 10; j++)
 		{
-            if (i == 0 && j == 0)
-                continue;
-
 			C3DSprite* sm = static_cast<cocos3d::C3DSprite*>(C3DRenderNodeManager::getInstance()->getResource("demores/haigui/haigui.ckb"));
 			sm->setPosition(-50 +i * 10, -50 + j * 10, 0);
 			_scene->addChild(sm);
