@@ -1,3 +1,25 @@
+/****************************************************************************
+Copyright (c) Chukong Technologies Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+****************************************************************************/
+
 #include "C3DAnimation.h"
 #include "Base.h"
 #include "C3DAnimationClip.h"
@@ -128,7 +150,7 @@ void C3DAnimation::play(C3DAnimationClip* clip)
 	if(clip == _currentClip && clip->isResumed())
 		return;
 
-	else if(_currentClip != NULL && clip != _currentClip && _currentClip->isPaused())
+	if(_currentClip != NULL && clip != _currentClip && _currentClip->isPaused())
 	{
 		_currentClip->resetState(C3DAnimationClip::CLIP_IS_PAUSED);
 		removeRunClip(_currentClip);
@@ -421,6 +443,18 @@ void C3DAnimation::pauseAll()
 
 void C3DAnimation::addRunClip(C3DAnimationClip* clip)
 {
+    if (!clip) return;
+
+    // if the animation-clip has in the _runingClips, return.
+    std::list<C3DAnimationClip*>::iterator clipItr = _runningClips.begin();
+    while (clipItr != _runningClips.end())
+    {
+        if (clip->getID() == (*clipItr)->getID())
+            return;
+        else
+            ++clipItr;
+    }
+
     if (_runningClips.empty())
     {
         _state = RUNNING;
