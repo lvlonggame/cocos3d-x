@@ -4,7 +4,7 @@ As you can see here, we have created a 3D engine for mobile games, called it coc
 
 We're doing this, merging 3D features from this repository into github.com/cocos2d/cocos2d-x repo, so we will eventually have one engine for both 2D and 3D games.
 
-You can get the code of cocos2d-x through "submodule update".
+You can get the code of cocos2d-x through "git submodule update".
 
 <img src="http://b278.photo.store.qq.com/psb?/V149io673qGalT/afLO8XvfWa9sgZlisgr9FzM8U49zW68a5v0x*HrUn1Q!/b/dMGmvKVaDAAA&bo=wAOAAgAAAAADAGQ!" width=800 height = 480>
   
