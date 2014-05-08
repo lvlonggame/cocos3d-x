@@ -60,7 +60,7 @@ C3DPostProcess::~C3DPostProcess()
 	for ( ; ite != _postEffects.end(); ++ite )
 	{
 		SAFE_RELEASE( (*ite).second );
-		_postEffects.erase( ite );
+		//_postEffects.erase( ite );
 	}
 	_postEffects.clear();
 

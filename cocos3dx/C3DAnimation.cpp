@@ -150,7 +150,7 @@ void C3DAnimation::play(C3DAnimationClip* clip)
 	if(clip == _currentClip && clip->isResumed())
 		return;
 
-	else if(_currentClip != NULL && clip != _currentClip && _currentClip->isPaused())
+	if(_currentClip != NULL && clip != _currentClip && _currentClip->isPaused())
 	{
 		_currentClip->resetState(C3DAnimationClip::CLIP_IS_PAUSED);
 		removeRunClip(_currentClip);
@@ -443,6 +443,18 @@ void C3DAnimation::pauseAll()
 
 void C3DAnimation::addRunClip(C3DAnimationClip* clip)
 {
+    if (!clip) return;
+
+    // if the animation-clip has in the _runingClips, return.
+    std::list<C3DAnimationClip*>::iterator clipItr = _runningClips.begin();
+    while (clipItr != _runningClips.end())
+    {
+        if (clip->getID() == (*clipItr)->getID())
+            return;
+        else
+            ++clipItr;
+    }
+
     if (_runningClips.empty())
     {
         _state = RUNNING;

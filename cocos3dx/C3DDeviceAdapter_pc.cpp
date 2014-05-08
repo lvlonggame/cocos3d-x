@@ -85,13 +85,13 @@ void C3DDeviceAdapter::checkDevice()
 
 void C3DDeviceAdapter::checkShadow()
 {
-	_supportShadow = false;
+	_supportShadow = true;
 }
 
 void C3DDeviceAdapter::checkPostProcess()
 {
 
-	_supportPostProcess = false;
+	_supportPostProcess = true;
 }
 
 
