@@ -320,7 +320,7 @@ void FullDemoLayer::createEnemy()
 {
 	cocos3d::C3DSprite* entity = NULL;
 
-	entity = static_cast<cocos3d::C3DSprite*>(C3DRenderNodeManager::getInstance()->getResource("demores/fulldemo/guai/guai.ckb"));
+	entity = static_cast<cocos3d::C3DSprite*>(C3DRenderNodeManager::getInstance()->getResource("demores/fulldemo/monster/monster.ckb"));
 	entity->getAnimation()->setQuality(C3DAnimation::Low);
 
 	if(entity != NULL)
@@ -340,7 +340,7 @@ void FullDemoLayer::createEnemy()
 		for (int i = 0; i < 5; i++)
 		{
 	
-			C3DSprite* newEntity = static_cast<cocos3d::C3DSprite*>(C3DRenderNodeManager::getInstance()->getResource("demores/fulldemo/guai/guai.ckb"));
+			C3DSprite* newEntity = static_cast<cocos3d::C3DSprite*>(C3DRenderNodeManager::getInstance()->getResource("demores/fulldemo/monster/monster.ckb"));
 
 			newEntity->playAnimationClip("idle");
 
