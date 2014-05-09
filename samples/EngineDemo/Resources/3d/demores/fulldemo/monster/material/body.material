@@ -13,7 +13,7 @@ material
 
 			sampler u_diffuseTexture
 			{
-				path = demores/fulldemo/guai/guai.png
+				path = demores/fulldemo/monster/monster.png
 				mipmap = true
 				wrapS = REPEAT
 				wrapT = REPEAT
