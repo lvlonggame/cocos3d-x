@@ -160,9 +160,6 @@ public:
      */
     static void createLookAt(const C3DVector3& eyePosition, const C3DVector3& targetPosition, const C3DVector3& up, C3DMatrix* dst);
 
-	// 通过轴创建矩阵 lvlong
-	//static void createAxis(C3DVector3& position, C3DVector3& xaxis, C3DVector3& yaxis, C3DVector3& zaxis, C3DMatrix* dst);
-
     /**
      * Creates a view matrix based on the specified input parameters.
      *
