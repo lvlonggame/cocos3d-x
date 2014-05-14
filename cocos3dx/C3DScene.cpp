@@ -92,7 +92,7 @@ void C3DScene::removeAllNode()
 
 C3DScene::C3DScene(const std::string& str) : C3DNode(str)
 {
-	_ambientColor = new C3DVector3();
+	_ambientColor = new C3DVector3(1,1,1);
 
 	_showBoundingBox = false;
 
