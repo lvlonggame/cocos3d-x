@@ -71,7 +71,7 @@ public:
     * delete valid config info for the avatar model.
 	* @param type part type
 	*/
-	bool delPartConfig(const std::string& type);// add by lvlong
+	bool delPartConfig(const std::string& type);
 
 	bool addPart(const std::string& type, const std::string& modelName, const std::string& matName);
 	bool delPart(const std::string& type,const std::string& modelName,const std::string& matName);
