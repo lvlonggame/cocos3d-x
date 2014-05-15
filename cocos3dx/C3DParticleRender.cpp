@@ -232,7 +232,7 @@ bool C3DParticleRender::init(unsigned int capacity)
     }*/
 	//..
 
-    reSizeCapacity(capacity);
+  //  reSizeCapacity(capacity);
 
     return true;
 }
