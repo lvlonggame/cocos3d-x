@@ -47,7 +47,7 @@ C3DBatchMesh::C3DBatchMesh(C3DVertexFormat* vertexFormat, PrimitiveType primitiv
 	resizeVertex(_vertexCapacity * 4);
 	if ( _bUseIndex )
 	{
-		resizeIndex( _indexCapacity * 6);
+		resizeIndex( /*_indexCapacity*/ _vertexCapacity * 6 );
 	}
 }
 
