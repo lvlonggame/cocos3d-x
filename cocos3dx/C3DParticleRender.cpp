@@ -206,7 +206,7 @@ bool C3DParticleRender::init(unsigned int capacity)
     _model = new C3DBatchModel(_system);
     _model->setMesh(mesh);
     reloadMaterial();
-	_nCapacity = 0;
+	_nCapacity = capacity;
 	_nParticle = 0;
 
     //...
