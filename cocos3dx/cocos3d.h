@@ -62,4 +62,14 @@ THE SOFTWARE.
 #include "C3DLineRender.h"
 #include "C3DAnimation.h"
 
+#include "C3DRenderNodeManager.h"
+#include "C3DDeviceAdapter.h"
+
+#include "Vertex.h"
+#include "C3DVertexFormat.h"
+#include "MeshPart.h"
+#include "C3DModelNode.h"
+#include "C3DMaterialManager.h"
+#include "C3DSkinlessModel.h"
+
 #endif

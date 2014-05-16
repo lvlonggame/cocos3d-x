@@ -203,11 +203,15 @@ bool C3DParticleRender::init(unsigned int capacity)
     C3DBatchMesh* mesh = new C3DBatchMesh(&vertexformat, PrimitiveType_TRIANGLES, true, capacity);
     //C3DBatchMesh* mesh = new C3DBatchMesh(&vertexformat, PrimitiveType_TRIANGLE_STRIP, true, capacity);
 
+    mesh->init();
+
     _model = new C3DBatchModel(_system);
     _model->setMesh(mesh);
     reloadMaterial();
-	_nCapacity = 0;
+	_nCapacity = capacity;
 	_nParticle = 0;
+    
+   
 
     //...
 	/**if (_system)
@@ -232,7 +236,7 @@ bool C3DParticleRender::init(unsigned int capacity)
     }*/
 	//..
 
-  //  reSizeCapacity(capacity);
+   // reSizeCapacity(capacity);
 
     return true;
 }
