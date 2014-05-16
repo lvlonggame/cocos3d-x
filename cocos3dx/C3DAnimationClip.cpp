@@ -698,7 +698,9 @@ void C3DAnimationClip::clearActionEvent()
 			SAFE_DELETE(lEvt);
 			++iter;
 		}
-		SAFE_DELETE(_actionEvents);
+        
+        _actionEvents->clear();
+		//SAFE_DELETE(_actionEvents);
 	}
 }
 
