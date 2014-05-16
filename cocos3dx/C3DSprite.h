@@ -128,18 +128,13 @@ public:
 
 	void setSkeleton(C3DBone* joint);
 
-	// 获取跟骨骼 lvlong
 	C3DBone* getSkeletonRootBone()const;
 
-	// 根据名字获得骨骼 lvlong
 	C3DBone* getBone(const std::string& name)const;
 
     C3DAnimationClip* getAnimationClip(const std::string& strClip);
     C3DAnimationClip* getCurAnimationClip();
 
-    //unsigned int getTriangleCount() const;
-
-	// 获取动画总帧数 lvlong
 	int getAnimationFrameCount();
 
 	virtual C3DNode* clone(CloneContext& context) const;

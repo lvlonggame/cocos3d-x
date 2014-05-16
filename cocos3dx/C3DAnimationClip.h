@@ -248,7 +248,7 @@ private:
 
 	std::list<C3DActionEvent*>* _actionEvents;
 
-	unsigned int _frameCount;// 当前剪辑总帧数 lvlong
+	unsigned int _frameCount;
 };
 }
 #endif

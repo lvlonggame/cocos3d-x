@@ -6,8 +6,8 @@ material
 
 		pass 0
 		{
-			vertexShader = shaders/textured.vsh
-			fragmentShader = shaders/textured.fsh
+			vertexShader = shaders/texture.vsh
+			fragmentShader = shaders/texture.fsh
 			defines = SKINNING_JOINT_COUNT 32
 
 			sampler u_diffuseTexture

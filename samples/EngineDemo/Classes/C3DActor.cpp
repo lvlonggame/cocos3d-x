@@ -90,7 +90,7 @@ public:
 		_parts.push_back(part);
 	}
 
-	bool delPart(const std::string& modelName, const std::string& matName)// lvlong
+	bool delPart(const std::string& modelName, const std::string& matName)
 	{
 		std::vector<BodyPart*>::iterator iter = _parts.begin();
 		for (;iter != _parts.end(); ++iter)
@@ -131,7 +131,7 @@ public:
 		return _parts[_curIndex];
 	}
 
-	BodyPart* findPart(const std::string& modelName, const std::string& matName)// lvlong
+	BodyPart* findPart(const std::string& modelName, const std::string& matName)
 	{
 		std::vector<BodyPart*>::iterator iter = _parts.begin();
 		for (;iter != _parts.end(); ++iter)

@@ -71,7 +71,7 @@ public:
 
 private:
 	void bindVertex(void);
-	void setMaterialNodeBinding(void);
+	void setMaterialNodeBinding(C3DMaterial* material);
 
 private:
 	C3DNode* _node;

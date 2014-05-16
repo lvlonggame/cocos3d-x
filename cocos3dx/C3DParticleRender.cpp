@@ -210,7 +210,7 @@ bool C3DParticleRender::init(unsigned int capacity)
 	_nParticle = 0;
 
     //...
-	if (_system)
+	/**if (_system)
     {
         _model->getMaterial()->setNodeAutoBinding(_system);
 
@@ -229,10 +229,10 @@ bool C3DParticleRender::init(unsigned int capacity)
                 pass->setNodeAutoBinding(_system);
             }
         }
-    }
+    }*/
 	//..
 
-    reSizeCapacity(capacity);
+  //  reSizeCapacity(capacity);
 
     return true;
 }

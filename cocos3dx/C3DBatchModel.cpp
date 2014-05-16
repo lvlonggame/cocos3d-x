@@ -96,16 +96,16 @@ C3DMaterial* C3DBatchModel::getMaterial()
     return _material;
 }
 
-void C3DBatchModel::setMaterialNodeBinding(void)
+void C3DBatchModel::setMaterialNodeBinding(C3DMaterial* material)
 {
-	if ( _node != NULL && _material != NULL )
+	if ( _node != NULL && material != NULL )
 	{
-		_material->setNodeAutoBinding(_node);
+		material->setNodeAutoBinding(_node);
 
 		unsigned int techniqueCount = _material->getTechniqueCount();
 		for (unsigned int i = 0; i < techniqueCount; ++i)
 		{
-			C3DTechnique* technique = _material->getTechnique(i);
+			C3DTechnique* technique = material->getTechnique(i);
 
 			technique->setNodeAutoBinding(_node);
 
@@ -130,10 +130,18 @@ void C3DBatchModel::setMaterial(C3DMaterial* material)
 			_material = material;
 			material->retain();
 		}
+
+		bindVertex();
+
 		// Apply node binding for the new material.
-		setMaterialNodeBinding();
+        if (_node)
+        {
+            setMaterialNodeBinding(_material);
+        }
+		
 	}
-	bindVertex();
+	
+
 }
 
 void C3DBatchModel::bindVertex(void)
@@ -152,6 +160,10 @@ void C3DBatchModel::bindVertex(void)
 				SAFE_RELEASE(b);
 			}
 		}
+
+		
+
+
 	}
 }
 
