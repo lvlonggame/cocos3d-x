@@ -14,7 +14,7 @@ Particle particle system
 		frameRandomOffset = 0
 		frameDuration = 0
 		srcBlend = SRC_ALPHA
-    dstBlend = ONE
+		dstBlend = ONE
 		texture = demores/particles/liziguang01.png
 	}
 
@@ -89,7 +89,7 @@ Particle particle system
 		frameRandomOffset = 0
 		frameDuration = 0
 		srcBlend = SRC_ALPHA
-    dstBlend = ONE
+		dstBlend = ONE
 		texture = demores/particles/liziguang01.png
 	}
 
@@ -164,7 +164,7 @@ Particle particle system
 		frameRandomOffset = 0
 		frameDuration = 0
 		srcBlend = SRC_ALPHA
-    dstBlend = ONE
+		dstBlend = ONE
 		texture = demores/particles/liziguang01.png
 	}
 
@@ -239,7 +239,7 @@ Particle particle system
 		frameRandomOffset = 0
 		frameDuration = 0
 		srcBlend = SRC_ALPHA
-    dstBlend = ONE
+		dstBlend = ONE
 		texture = demores/particles/liziguang01.png
 	}
 
@@ -320,7 +320,7 @@ Particle particle system
 		frameRandomOffset = 0
 		frameDuration = 0
 		srcBlend = SRC_ALPHA
-    dstBlend = ONE
+		dstBlend = ONE
 		texture = demores/particles/liziguang01.png
 	}
 
@@ -401,7 +401,7 @@ Particle particle system
 		frameRandomOffset = 0
 		frameDuration = 0
 		srcBlend = SRC_ALPHA
-    dstBlend = ONE
+		dstBlend = ONE
 		texture = demores/particles/liziguang01.png
 	}
 
@@ -482,7 +482,7 @@ Particle particle system
 		frameRandomOffset = 0
 		frameDuration = 0
 		srcBlend = SRC_ALPHA
-    dstBlend = ONE
+		dstBlend = ONE
 		texture = demores/particles/xiantiao01.png
 	}
 
@@ -557,7 +557,7 @@ Particle particle system
 		frameRandomOffset = 0
 		frameDuration = 0
 		srcBlend = SRC_ALPHA
-    dstBlend = ONE
+		dstBlend = ONE
 		texture = demores/particles/xiantiao01.png
 	}
 
@@ -643,7 +643,7 @@ Particle particle system
 		frameRandomOffset = 0
 		frameDuration = 0
 		srcBlend = SRC_ALPHA
-    dstBlend = ONE
+		dstBlend = ONE
 		texture = demores/particles/liziguang01.png
 	}
 
@@ -718,7 +718,7 @@ Particle particle system
 		frameRandomOffset = 0
 		frameDuration = 0
 		srcBlend = SRC_ALPHA
-    dstBlend = ONE
+		dstBlend = ONE
 		texture = demores/particles/liziguang01.png
 	}
 
@@ -793,7 +793,7 @@ Particle particle system
 		frameRandomOffset = 0
 		frameDuration = 0
 		srcBlend = SRC_ALPHA
-    dstBlend = ONE
+		dstBlend = ONE
 		texture = demores/particles/xiantiao01.png
 	}
 
@@ -868,7 +868,7 @@ Particle particle system
 		frameRandomOffset = 0
 		frameDuration = 0
 		srcBlend = SRC_ALPHA
-    dstBlend = ONE
+		dstBlend = ONE
 		texture = demores/particles/liziguang01.png
 	}
 
@@ -929,7 +929,7 @@ Particle particle system
 
 Particle particle system
 {
-	particleCountMax = 5000
+	particleCountMax = 200
 	timeLast = 0
 	timeStart = 0
 
@@ -943,7 +943,7 @@ Particle particle system
 		frameRandomOffset = 0
 		frameDuration = 0
 		srcBlend = SRC_ALPHA
-    dstBlend = ONE
+		dstBlend = ONE
 		texture = demores/particles/smoke.png
 	}
 
