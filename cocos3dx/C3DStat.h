@@ -136,6 +136,39 @@ namespace cocos3d
 
 		cocos2d::Node* _parent;
 	};
+
+#ifdef ENABLE_C3D_PROFILE
+#define STAT_BEGIN()\
+	C3DStat::getInstance()->beginStat();
+
+#define STAT_END()\
+	C3DStat::getInstance()->endStat();
+
+#define STAT_INC_TRIANGLE_TOTAL(val)\
+	if (C3DStat::getInstance()->isStatEnable())\
+	{\
+		C3DStat::getInstance()->incTriangleTotal(val);\
+	}
+
+#define STAT_INC_TRIANGLE_DRAW(val)\
+	if (C3DStat::getInstance()->isStatEnable())\
+	{\
+	C3DStat::getInstance()->incTriangleDraw(val);\
+	}
+
+#define STAT_INC_DRAW_CALL(val)\
+	if (C3DStat::getInstance()->isStatEnable())\
+	{\
+	C3DStat::getInstance()->incDrawCall(val);\
+	}
+#else
+#define STAT_BEGIN()
+#define STAT_END()
+
+#define STAT_INC_TRIANGLE_TOTAL(val)
+#define STAT_INC_TRIANGLE_DRAW(val)
+#define STAT_INC_DRAW_CALL(val)
+#endif
 }
 
 #endif

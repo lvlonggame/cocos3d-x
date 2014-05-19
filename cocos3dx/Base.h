@@ -161,11 +161,13 @@ extern void printError(const char* format, ...);
 //#define M_1_PI                      0.31830988618379067154
 //#endif
 
-#ifdef WIN32
+#ifdef WIN32 
+#if _MSC_VER <= 1700
     inline float round(float r)
     {
         return (r > 0.0f) ? floor(r + 0.5f) : ceil(r - 0.5f);
     }
+#endif
 #endif
 
 // NOMINMAX makes sure that windef.h doesn't add macros min and max
@@ -312,6 +314,11 @@ extern GLenum __gl_error_code;
 #else
 #define assert(expression) do { (void)sizeof(expression); } while (0)
 #endif
+#endif
+
+#ifdef COCOS3DX_DEBUG
+#define ENABLE_C3D_PROFILE
+#define ENABLE_C3D_DRAWDEBUG
 #endif
 
 #endif

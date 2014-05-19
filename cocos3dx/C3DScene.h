@@ -122,10 +122,6 @@ public:
 
 	C3DGeoWireRender* getGeoWireRender();
 
-	virtual void addChild(C3DNode* child);
-
-	virtual void removeChild(C3DNode* child);
-
 	void addNodeToRenderList(C3DNode* node);
 	void removeNodeFromRenderList(C3DNode* node);
 

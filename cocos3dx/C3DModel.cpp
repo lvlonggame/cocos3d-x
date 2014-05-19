@@ -639,7 +639,6 @@ void C3DModel::setMaterialName(const std::string& matName)
 void C3DModel::draw(void)
 {
 	unsigned int partCount = _mesh->getPartCount();
-	bool bStatEnable = C3DStat::getInstance()->isStatEnable();
 
 	C3DMaterial::TechniqueUsage techUsage =
 		_node->get3DScene()->isInShadowPass() ? C3DMaterial::TECH_USAGE_SHADOWMAP : C3DMaterial::TECH_USAGE_SCREEN;
@@ -652,16 +651,12 @@ void C3DModel::draw(void)
 			C3DTechnique* technique = _material->getTechnique(techUsage);
 
 			unsigned int passCount = technique->getPassCount();
-			if (bStatEnable)
-			{
-				C3DStat::getInstance()->incDrawCall(passCount);
-			}
+			
+			STAT_INC_DRAW_CALL(passCount);
+
 			for (unsigned int i = 0; i < passCount; ++i)
 			{
-				if (bStatEnable)
-				{
-					C3DStat::getInstance()->incTriangleDraw(_mesh->getTriangleCount());
-				}
+				STAT_INC_TRIANGLE_DRAW(_mesh->getTriangleCount());
 
 				C3DPass* pass = technique->getPass(i);
 				//applyLightParam(pass);
@@ -703,24 +698,16 @@ void C3DModel::channelDrawPart( int partIndex )
 	C3DMaterial* material = getMaterial(partIndex);
 	MeshPart* meshPart = _mesh->getPart(partIndex);
 
-	bool bStatEnable = C3DStat::getInstance()->isStatEnable();
-
 	if (material)
 	{
 		C3DTechnique* technique = material->getTechnique(techUsage);
 		unsigned int passCount = technique->getPassCount();
 
-		if (bStatEnable)
-		{
-			C3DStat::getInstance()->incDrawCall(passCount);
-		}
+		STAT_INC_DRAW_CALL(passCount);
 
 		for (unsigned int j = 0; j < passCount; ++j)
 		{
-			if (bStatEnable)
-			{
-				C3DStat::getInstance()->incTriangleDraw(meshPart->getTriangleCount());
-			}
+			STAT_INC_TRIANGLE_DRAW(meshPart->getTriangleCount());
 
 			C3DPass* pass = technique->getPass(j);
 			//applyLightParam(pass);

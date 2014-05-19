@@ -98,14 +98,10 @@ C3DRenderState::~C3DRenderState()
     SAFE_RELEASE(_stateBlock);
 
     // Destroy all the material parameters
-	for (std::list<MaterialParameter*>::iterator iter = _parameters.begin();iter != _parameters.end();++iter)
+	for (std::list<MaterialParameter*>::iterator iter = _parameters.begin(); iter != _parameters.end(); ++iter)
    // for (unsigned int i = 0, count = _parameters.size(); i < count; ++i)
     {
-        MaterialParameter* parameter = *iter;
-        if (parameter)
-        {
-            SAFE_RELEASE(parameter);
-        }
+        SAFE_RELEASE((*iter));
     }
 	_parameters.clear();
 }
@@ -245,7 +241,7 @@ void C3DRenderState::setNodeAutoBinding(C3DNode* node)
         std::map<std::string, AutoBinding>::const_iterator itr = _autoBindings.begin();
         while (itr != _autoBindings.end())
         {
-            applyNodeAutoBinding(itr->first.c_str(), itr->second);
+            applyNodeAutoBinding(itr->first, itr->second);
             itr++;
         }
     }

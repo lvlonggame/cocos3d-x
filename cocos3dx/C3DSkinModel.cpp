@@ -132,7 +132,6 @@ void C3DSkinModel::setSkin(C3DMeshSkin* skin)
 
 void C3DSkinModel::draw()
 {
-    bool bStatEnable = C3DStat::getInstance()->isStatEnable();
     C3DMaterial::TechniqueUsage techUsage =
         getNode()->get3DScene()->isInShadowPass() ? C3DMaterial::TECH_USAGE_SHADOWMAP : C3DMaterial::TECH_USAGE_SCREEN;
 
@@ -149,12 +148,10 @@ void C3DSkinModel::draw()
 
 			//**
             unsigned int passCount = technique->getPassCount();
-            if (bStatEnable)
-                C3DStat::getInstance()->incDrawCall(passCount);
+            STAT_INC_DRAW_CALL(passCount);
             for (unsigned int i = 0; i < passCount; ++i)
             {
-                if (bStatEnable)
-                    C3DStat::getInstance()->incTriangleDraw(_mesh->getTriangleCount());
+                STAT_INC_TRIANGLE_DRAW(_mesh->getTriangleCount());
 
                 C3DPass* pass = technique->getPass(i);
 				applyInternalParam(pass);
@@ -201,8 +198,7 @@ void C3DSkinModel::draw()
 
                 for (unsigned int j = 0; j < passCount; ++j)
                 {
-                    if (bStatEnable)
-                        C3DStat::getInstance()->incTriangleDraw(meshPart->getTriangleCount());
+                    STAT_INC_TRIANGLE_DRAW(meshPart->getTriangleCount());
 
                     C3DPass* pass = technique->getPass(j);
                     //applyLightParam(pass);
@@ -217,8 +213,8 @@ void C3DSkinModel::draw()
 					{
 						BonePart** parts = skin->_parts;
 
-                        if (bStatEnable)
-                            C3DStat::getInstance()->incDrawCall(skin->_partCount);
+                        STAT_INC_DRAW_CALL(skin->_partCount);
+
 						for (unsigned int iBonePart=0; iBonePart < skin->_partCount; iBonePart++)
 						{
 							BonePart* bonePart = parts[iBonePart];

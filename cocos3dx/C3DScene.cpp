@@ -207,10 +207,12 @@ C3DGeoWireRender* C3DScene::getGeoWireRender()
 
 void C3DScene::drawDebug()
 {
+#ifdef ENABLE_C3D_DRAWDEBUG
 	for (size_t i = 0; i < _children.size(); i++)
 	{
 		_children[i]->drawDebug();
 	}
+#endif
 
 	if (_geoWireRender)
 		_geoWireRender->flush();
@@ -218,7 +220,7 @@ void C3DScene::drawDebug()
 
 void C3DScene::preDraw()
 {
-	C3DStat::getInstance()->beginStat();
+	STAT_BEGIN();
 
 	if(C3DDeviceAdapter::getInstance()->isSupportShadow() == true)
 	{
@@ -227,10 +229,8 @@ void C3DScene::preDraw()
 			_inShadowPass = true;
 
 			_activeShadowMap->beginDraw();
+			
 			//draw scene
-
-			bool bStatEnable = C3DStat::getInstance()->isStatEnable();
-
 			for (size_t i = 0; i < _children.size(); ++i)
 			{
 				C3DNode* node = _children[i];
@@ -238,8 +238,7 @@ void C3DScene::preDraw()
 				{
 					node->draw();
 
-					if (bStatEnable)
-						C3DStat::getInstance()->incTriangleTotal(node->getTriangleCount());
+					STAT_INC_TRIANGLE_TOTAL(node->getTriangleCount());
 				}
 			}
 
@@ -248,23 +247,18 @@ void C3DScene::preDraw()
 			_inShadowPass = false;
 		}
 	}
-    
-
 }
 
 void C3DScene::draw()
 {
-	bool bStatEnable = C3DStat::getInstance()->isStatEnable();
-	size_t i;
-	for (i = 0; i < _children.size(); ++i)
+	for (size_t i = 0; i < _children.size(); ++i)
 	{
 		C3DNode* node = _children[i];
 		if(node->isVisible())
 		{
 			node->draw();
 
-			if (bStatEnable)
-				C3DStat::getInstance()->incTriangleTotal(node->getTriangleCount());
+			STAT_INC_TRIANGLE_TOTAL(node->getTriangleCount());
 		}
 	}
 }
@@ -304,7 +298,8 @@ void C3DScene::postDraw()
 			_postDrawNode[i]->draw();
 		}
 	}
-    C3DStat::getInstance()->endStat();
+    
+	STAT_END();
 }
 
 // update routine
@@ -452,21 +447,10 @@ void C3DScene::addNodeToRenderList(C3DNode* node)
 	default:
 		break;
 	}
-
-	for (size_t i = 0; i < node->_children.size(); i++)
-	{
-	//	addNodeToRenderList(node->_children[i]);
-	}
 }
 
 void C3DScene::removeNodeFromRenderList(C3DNode* node)
 {
-   // node->setScene(NULL);
-	for (size_t i = 0; i < node->_children.size(); i++)
-	{
-	//	removeNodeFromRenderList(node->_children[i]);
-	}
-
 	C3DNode::Type type = node->getType();
 	switch (type)
 	{
@@ -639,16 +623,6 @@ void C3DScene::setLayer(C3DLayer* layer)
             layer->retain();
         }
     }
-}
-
-void C3DScene::addChild(C3DNode* child)
-{
-	C3DNode::addChild(child);
-}
-
-void C3DScene::removeChild(C3DNode* child)
-{
-	C3DNode::removeChild(child);
 }
 
 const C3DVector4& C3DScene::getTimeParam(void) const

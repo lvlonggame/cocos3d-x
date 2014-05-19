@@ -42,12 +42,15 @@ C3DVertexFormat::C3DVertexFormat(const C3DVertexElement* elements, unsigned int 
 C3DVertexFormat::C3DVertexFormat(const C3DVertexFormat* vertexformat)
 	: _vertexSize(0)
 {
-	// Copy elements and compute vertex size
-	for (unsigned int i = 0; i < vertexformat->getElementCount(); ++i)
-    {
-		_elements.push_back( new C3DVertexElement() );
+	size_t elementCount = vertexformat->getElementCount();
+	_elements.resize(elementCount);
 
-		memcpy(_elements.back(), vertexformat->getElement(i), sizeof(C3DVertexElement));
+	// Copy elements and compute vertex size
+	for (unsigned int i = 0; i < elementCount; ++i)
+    {
+		_elements[i] = new C3DVertexElement();
+
+		memcpy(_elements[i], vertexformat->getElement(i), sizeof(C3DVertexElement));
 
         _vertexSize += vertexformat->getElement(i)->size * sizeof(float);
     }
@@ -56,7 +59,7 @@ C3DVertexFormat::C3DVertexFormat(const C3DVertexFormat* vertexformat)
 C3DVertexFormat::~C3DVertexFormat()
 {
 	C3DVertexElement* element = NULL;
-	for( std::vector<C3DVertexElement*>::iterator iter=_elements.begin(); iter!=_elements.end(); iter++ )
+	for( std::vector<C3DVertexElement*>::iterator iter=_elements.begin(); iter!=_elements.end(); ++iter )
 	{
 		element = *iter;
 		delete element;

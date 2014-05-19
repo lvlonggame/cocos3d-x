@@ -27,8 +27,6 @@ THE SOFTWARE.
 
 #include "cocos2d.h"
 
-#define ENABLE_C3D_PROFILE
-
 namespace cocos3d
 {
     /**

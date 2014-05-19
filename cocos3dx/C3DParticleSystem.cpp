@@ -406,11 +406,8 @@ void C3DParticleSystem::draw()
     {
         return;
     }
-	bool bStat = C3DStat::getInstance()->isStatEnable();
-	if (bStat)
-	{
-		C3DStat::getInstance()->incTriangleTotal(_validParticleCount * 2);
-	}
+
+	STAT_INC_TRIANGLE_TOTAL(_validParticleCount * 2);
 	/*static C3DAABB box;
 	static C3DVector3 pos;
 	pos = getTranslationWorld();
@@ -424,11 +421,8 @@ void C3DParticleSystem::draw()
 
 	if(_particles && _render && _render->isVisible())
     {
-		if (bStat)
-		{
-			C3DStat::getInstance()->incTriangleDraw(_validParticleCount * 2);
-			C3DStat::getInstance()->incDrawCall(1);
-		}
+		STAT_INC_TRIANGLE_DRAW(_validParticleCount * 2);
+		STAT_INC_DRAW_CALL(1);
 
 		_render->draw();
     }

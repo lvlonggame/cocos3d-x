@@ -1025,6 +1025,8 @@ C3DMeshSkin* C3DResourceLoader::readMeshSkin()
     }
     meshSkin->setJointCount(jointCount);
 
+	skinData->joints.reserve(jointCount);
+
     // Read joint xref strings for all joints in the list
     for (unsigned int i = 0; i < jointCount; i++)
     {
@@ -1043,6 +1045,9 @@ C3DMeshSkin* C3DResourceLoader::readMeshSkin()
     if (jointsBindPosesCount > 0)
     {
         assert(jointCount * 16 == jointsBindPosesCount);
+		
+		skinData->inverseBindPoseMatrices.reserve(jointCount);
+
         float m[16];
         for (unsigned int i = 0; i < jointCount; i++)
         {
@@ -1068,6 +1073,7 @@ C3DMeshSkin* C3DResourceLoader::readMeshSkin()
 	if(bonePartCount > 0)
 	{
 		std::vector<BonePartData*> bonePartDatas;
+		bonePartDatas.reserve(bonePartCount);
 
 		for (unsigned int i = 0; i < bonePartCount; ++i)
 		{
