@@ -1067,12 +1067,9 @@ C3DMeshSkin* C3DResourceLoader::readMeshSkin()
     }
 	if(bonePartCount > 0)
 	{
-		std::vector<BonePartData*> bonePartDatas;
-
+        BonePartData* partData = new BonePartData();
 		for (unsigned int i = 0; i < bonePartCount; ++i)
 		{
-			BonePartData* partData = new BonePartData();
-
 			// Read primitive type, index format and index count
 			unsigned int iByteCount;
 			if (_stream->read(&partData->_batchID, 4, 1) != 1 ||
@@ -1081,6 +1078,7 @@ C3DMeshSkin* C3DResourceLoader::readMeshSkin()
 				_stream->read(&iByteCount, 4, 1) != 1)
 			{
 				SAFE_DELETE(skinData);
+                SAFE_DELETE(partData);
 				return NULL;
 			}
 			partData->indexCount = iByteCount / sizeof(unsigned int);
@@ -1089,31 +1087,22 @@ C3DMeshSkin* C3DResourceLoader::readMeshSkin()
 			if (_stream->read(partData->indexData, 1, iByteCount) != iByteCount)
 			{
 				SAFE_DELETE(skinData);
+                SAFE_DELETE(partData);
 				return NULL;
 			}
-			bonePartDatas.push_back(partData);
+
+            BonePart* part = meshSkin->addPart(partData->_batchID, partData->_offsetVertexIndex, partData->_numVertexIndex);
+            if (part == NULL)
+            {
+            	LOG_ERROR_VARG("Failed to create bone part (i=%d):", i);
+            	SAFE_DELETE(skinData);
+                SAFE_DELETE(partData);
+            	return NULL;
+            }
+            part->setIndexData(partData->indexData, partData->indexCount);
 		}
 
-		// Create bone parts
-		for (unsigned int i = 0; i < bonePartDatas.size(); ++i)
-		{
-			BonePartData* partData = bonePartDatas[i];
-
-			BonePart* part = meshSkin->addPart(partData->_batchID, partData->_offsetVertexIndex, partData->_numVertexIndex);
-			if (part == NULL)
-			{
-				LOG_ERROR_VARG("Failed to create bone part (i=%d):", i);
-				SAFE_DELETE(skinData);
-				return NULL;
-			}
-			part->setIndexData(partData->indexData, partData->indexCount);
-		}
-		//std::vector<BonePartData*> bonePartDatas
-		for( std::vector<BonePartData*>::iterator iter=bonePartDatas.begin(); iter!=bonePartDatas.end(); ++iter )
-		{
-			SAFE_DELETE(*iter);
-		}
-		bonePartDatas.clear();
+        SAFE_DELETE(partData);
 	}
 	//............
 
