@@ -297,7 +297,7 @@ namespace cocos3d
 
 	void C3DVertexDeclaration::setVertexAttribPointer(GLuint indx, GLint size, GLenum type, GLboolean normalize, GLsizei stride, void* pointer)
 	{
-		assert(indx < (GLuint)__maxVertexAttribs);
+		//assert(indx < (GLuint)__maxVertexAttribs);
 
 		//_vaEnableMask |= 1 << indx;
 

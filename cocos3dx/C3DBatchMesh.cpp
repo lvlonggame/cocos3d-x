@@ -32,22 +32,22 @@ C3DBatchMesh::C3DBatchMesh(C3DVertexFormat* vertexFormat, PrimitiveType primitiv
     : C3DBaseMesh(vertexFormat,primitiveType)
 	/*, _primitiveType(primitiveType)*/
 	, _growSize(growSize)
-	, _vertexCapacity(initialCapacity)
+	, _vertexCapacity(initialCapacity*4)
 	, _vertexCount(0)
 	, _vertices(NULL)
 	, _verticesPtr(NULL)
 	, _indices(NULL)
 	, _indicesPtr(NULL)
 	, _indexCount(0)
-	, _indexCapacity( 0 )
+	, _indexCapacity( initialCapacity*6 )
 {
 	//_primitiveType = primitiveType;
 	//_vertexFormat = new C3DVertexFormat(vertexFormat);
     _bUseIndex = bIndex;
-	resizeVertex(_vertexCapacity * 4);
-	if ( _bUseIndex )
+	//resizeVertex(_vertexCapacity * 4);
+	//if ( _bUseIndex )
 	{
-		resizeIndex( /*_indexCapacity*/ _vertexCapacity * 6 );
+	//	resizeIndex( /*_indexCapacity*/ _vertexCapacity * 6 );
 	}
 }
 
@@ -58,6 +58,13 @@ C3DBatchMesh::~C3DBatchMesh()
 
 	_verticesPtr = NULL;
 	_indicesPtr = NULL;
+}
+    
+void C3DBatchMesh::init()
+{
+    resizeVertex( _vertexCapacity );
+    resizeIndex( _indexCapacity );
+    
 }
 
 void C3DBatchMesh::setVertexCapacity(unsigned int capacity)
@@ -110,26 +117,39 @@ bool C3DBatchMesh::resizeVertex(unsigned int capacity)
 
 bool C3DBatchMesh::resizeIndex(unsigned int capacity)
 {
-    if (_bUseIndex)
+    if (_bUseIndex == false)
+        return false;
+    
+    if (capacity == 0)
+	{
+		return false;
+	}
+    
+    if (capacity == _indexCapacity && _indicesPtr != NULL )
+	{
+		return true;
+	}
+    
+   
+    
+    unsigned short* oldIndex = _indices;
+    unsigned int voffset = _indicesPtr - _indices;
+
+    _indices = new unsigned short[capacity];
+
+    _indicesPtr = _indices + voffset;
+
+    if (oldIndex)
     {
-        unsigned short* oldIndex = _indices;
-        unsigned int voffset = _indicesPtr - _indices;
-
-        _indices = new unsigned short[capacity];
-
-        _indicesPtr = _indices + voffset;
-
-        if (oldIndex)
+        if (voffset)
         {
-            if (voffset)
-			{
-				memcpy(_indices, oldIndex, std::min(_indexCapacity, capacity) * sizeof(_indices[0]) );
-			}
-
-			SAFE_DELETE_ARRAY(oldIndex);
+            memcpy(_indices, oldIndex, std::min(_indexCapacity, capacity) * sizeof(_indices[0]) );
         }
-        _indexCapacity = capacity;
+
+        SAFE_DELETE_ARRAY(oldIndex);
     }
+    _indexCapacity = capacity;
+    
 
     return true;
 }

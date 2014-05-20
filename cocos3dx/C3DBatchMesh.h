@@ -38,10 +38,12 @@ class C3DBatchMesh : public C3DBaseMesh
 friend class C3DBatchModel;
 public:
 	C3DBatchMesh(C3DVertexFormat* vertexFormat);
-	C3DBatchMesh(C3DVertexFormat* vertexFormat, PrimitiveType primitiveType, bool bIndex = false, unsigned int initialCapacity = 1024, unsigned int growSize = 1024);
+	C3DBatchMesh(C3DVertexFormat* vertexFormat, PrimitiveType primitiveType, bool bIndex = false, unsigned int initialCapacity = 128, unsigned int growSize = 128);
 
     ~C3DBatchMesh();
 
+    void init();
+    
 	unsigned int getVertexCapacity() const
 	{
 		return _vertexCapacity;

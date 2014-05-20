@@ -55,24 +55,9 @@ C3DMorphMesh* C3DMorphMesh::createMesh(C3DVertexFormat* vertexFormat, unsigned i
 
 void C3DMorphMesh::setVertexData(void* vertexData, unsigned int vertexStart, unsigned int vertexCount)
 {
-    GL_ASSERT( glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer) );
-
-    if (vertexStart == 0 && vertexCount == 0)
-    {
-        GL_ASSERT( glBufferData(GL_ARRAY_BUFFER, _vertexCount * _vertexFormat->getVertexSize(), vertexData, _dynamic ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW) );
-    }
-    else
-    {
-        if (vertexCount == 0)
-        {
-            vertexCount = _vertexCount - vertexStart;
-        }
-
-        GL_ASSERT( glBufferSubData(GL_ARRAY_BUFFER, vertexStart * _vertexFormat->getVertexSize(), vertexCount * _vertexFormat->getVertexSize(), vertexData) );
-    }
-
-	GL_ASSERT( glBindBuffer(GL_ARRAY_BUFFER, 0) );
-
+    C3DMesh::setVertexData(vertexData, vertexStart, vertexCount);
+    
+    
 	setMorphVertexData(vertexData);
 }
 
