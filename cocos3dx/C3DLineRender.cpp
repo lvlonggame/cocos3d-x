@@ -85,6 +85,7 @@ void C3DLineRender::init( const std::string& materialPath )
 	C3DVertexFormat vertexformat = C3DVertexFormat(elements, 3);
 
 	C3DBatchMesh* mesh = new C3DBatchMesh(&vertexformat, PrimitiveType_TRIANGLES, true, 512);
+    mesh->init();
 
 	_model = new C3DBatchModel(this);
 	_model->setMesh(mesh);
