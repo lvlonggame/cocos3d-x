@@ -24,42 +24,6 @@ THE SOFTWARE.
 #include "C3DQuaternion.h"
 #include "Base.h"
 
-#ifndef NULL
-#define NULL 0
-#endif
-
-#ifndef MATH_PI
-#define MATH_PI 3.14159265358979323846f
-#endif
-
-#ifndef MATH_PIOVER2
-#define MATH_PIOVER2 1.57079632679489661923f
-#endif
-
-#ifndef MATH_PIX2
-#define MATH_PIX2 6.28318530717958647693f
-#endif
-
-// Object deletion macro
-#ifndef SAFE_DELETE
-#define SAFE_DELETE(x) \
-    if (x) \
-    { \
-        delete x; \
-        x = NULL; \
-    }
-#endif
-
-// Array deletion macro
-#ifndef SAFE_DELETE_ARRAY
-#define SAFE_DELETE_ARRAY(x) \
-    if (x) \
-    { \
-        delete[] x; \
-        x = NULL; \
-    }
-#endif
-
 namespace cocos3d
 {
 C3DAnimationCurve* C3DAnimationCurve::create(unsigned int pointCount)
