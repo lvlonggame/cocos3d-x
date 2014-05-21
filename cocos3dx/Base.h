@@ -157,9 +157,6 @@ extern void printError(const char* format, ...);
 #define MATH_PIX2                   6.28318530717958647693f
 #define MATH_EPSILON                0.000001f
 #define MATH_CLAMP(x, lo, hi)       ((x < lo) ? lo : ((x > hi) ? hi : x))
-//#ifndef M_1_PI
-//#define M_1_PI                      0.31830988618379067154
-//#endif
 
 #ifdef WIN32 
 #if _MSC_VER <= 1700
@@ -241,9 +238,7 @@ typedef GLuint RenderBufferHandle;
  * mode and is therefore safe to use for realtime/per-frame GL
  * function calls.
  */
-#ifdef NDEBUG
-#define GL_ASSERT( gl_code ) gl_code
-#else
+#ifdef COCOS3DX_DEBUG
 #define GL_ASSERT( gl_code ) \
     { \
         gl_code; \
@@ -254,6 +249,8 @@ typedef GLuint RenderBufferHandle;
         } \
         assert(__gl_error_code == GL_NO_ERROR); \
     }
+#else
+#define GL_ASSERT( gl_code ) gl_code
 #endif
 
 /**
