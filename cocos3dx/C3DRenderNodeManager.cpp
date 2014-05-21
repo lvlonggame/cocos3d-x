@@ -33,7 +33,6 @@ namespace cocos3d
 {
 static C3DRenderNodeManager* __spriteManagerInstance = NULL;
 
-// zhukaixy: 这个类叫C3DRenderNodeManager更合适点
 C3DRenderNodeManager::C3DRenderNodeManager()
 {
 }
@@ -55,7 +54,6 @@ C3DRenderNodeManager* C3DRenderNodeManager::getInstance()
 
 C3DResource* C3DRenderNodeManager::createResource(const std::string& name)
 {
-	// zhukaixy：这个地方和C3DRenderNode重复了
 	C3DResourceLoader* loader = C3DResourceLoader::create(name);
 	loader->autorelease();
 

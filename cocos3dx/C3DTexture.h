@@ -142,7 +142,6 @@ namespace cocos3d
 
         std::string			_path;
 
-		// zhukaixy: Handle不为0说明是一个Cocos3D纹理，否则为Cocos2D管理的纹理(即与_texture互斥)，历史遗留代码稍后处理。
 		GLuint				_handle;
 		C3DTexture::Format	_fmt;
 

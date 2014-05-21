@@ -200,7 +200,6 @@ const std::string C3DResourceLoader::getIdFromOffset() const
     return getIdFromOffset((unsigned int) _stream->tell());
 }
 
-// zhukaixy: 可以考虑对offset进行排序，加快查找速度
 const std::string C3DResourceLoader::getIdFromOffset(unsigned int offset) const
 {
     // Search the ref table for the given offset
@@ -910,8 +909,6 @@ void C3DResourceLoader::readLight(C3DLight* light)
 
 C3DModel* C3DResourceLoader::readModel(const std::string& nodeId)
 {
-	C3DModel* model = NULL;
-
     unsigned char hasMesh;
     if (!_stream->read(&hasMesh))
     {
@@ -942,6 +939,7 @@ C3DModel* C3DResourceLoader::readModel(const std::string& nodeId)
     }
 
 	// Read skin
+	C3DModel* model = NULL;
     if (hasSkin)
     {
 		model = C3DSkinModel::create();
@@ -981,7 +979,7 @@ C3DModel* C3DResourceLoader::readModel(const std::string& nodeId)
         }
     }
 
-	std::string materialName = "";
+	std::string materialName;
     if (hasMaterial)
 	{
 		materialName = _stream->readString();
@@ -1624,7 +1622,7 @@ bool C3DResourceLoader::readAnimationCurves()
 
     //create animation curve
 	C3DAnimationCurveMgr* mgr = C3DAnimationCurveMgr::sharedAnimationCurveMgr();
-    curvemap = mgr->createAnimationCurves(animationpath);
+	C3DAnimationCurveMgr::CurveMap* curvemap = mgr->createAnimationCurves(_path);
 
     unsigned int animationCount;
     if (!_stream->read(&animationCount))

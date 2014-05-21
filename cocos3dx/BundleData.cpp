@@ -24,26 +24,6 @@ THE SOFTWARE.
 #include "C3DVertexFormat.h"
 #include "C3DAABB.h"
 
-// Object deletion macro
-#ifndef SAFE_DELETE
-#define SAFE_DELETE(x) \
-    if (x) \
-    { \
-        delete x; \
-        x = NULL; \
-    }
-#endif
-
-// Array deletion macro
-#ifndef SAFE_DELETE_ARRAY
-#define SAFE_DELETE_ARRAY(x) \
-    if (x) \
-    { \
-        delete[] x; \
-        x = NULL; \
-    }
-#endif
-
 namespace cocos3d
 {
 MeshData::MeshData(C3DVertexElement* elements, unsigned int elementCount)
