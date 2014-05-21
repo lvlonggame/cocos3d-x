@@ -1619,13 +1619,11 @@ bool C3DResourceLoader::isAnimationLoaded() const
 
 bool C3DResourceLoader::readAnimationCurves()
 {
-    const std::string& animationpath = _path;
-    C3DAnimationCurveMgr* mgr = C3DAnimationCurveMgr::sharedAnimationCurveMgr();
-    C3DAnimationCurveMgr::CurveMap* curvemap = mgr->getAnimationCurves(animationpath);
-    if (curvemap)
-        return true;// already load
+	// caller should guarantee this
+	assert(!isAnimationLoaded());
 
     //create animation curve
+	C3DAnimationCurveMgr* mgr = C3DAnimationCurveMgr::sharedAnimationCurveMgr();
     curvemap = mgr->createAnimationCurves(animationpath);
 
     unsigned int animationCount;
