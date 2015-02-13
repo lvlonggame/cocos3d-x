@@ -1,25 +1,3 @@
-/****************************************************************************
-Copyright (c) Chukong Technologies Inc.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-****************************************************************************/
-
 #include "Base.h"
 #include "C3DLayer.h"
 #include "C3DAnimationClip.h"
@@ -392,7 +370,7 @@ unsigned short C3DAnimationClip::update_loop(unsigned long elapsedTime, bool upd
 
    if (updatePose)
    {
-       float percentComplete = (float)(_startTime + currentTime) / (float) _animation->_duration;
+       
 
        //   Evaluate this clip.
        C3DAnimationChannel* channel = NULL;
@@ -403,6 +381,11 @@ unsigned short C3DAnimationClip::update_loop(unsigned long elapsedTime, bool upd
        {
            channel = _animation->_channels[i];
            bone = channel->_bone;
+
+           if((_startTime + currentTime) > channel->_duration)
+               continue;
+
+           float percentComplete = (float)(_startTime + currentTime) / (float) channel->_duration;
 
            // Evaluate the point on Curve
            C3DAnimationCurve::InterpolationMode mode = _animation->getQuality() == C3DAnimation::High ? C3DAnimationCurve::Linear : C3DAnimationCurve::Near;
@@ -698,9 +681,7 @@ void C3DAnimationClip::clearActionEvent()
 			SAFE_DELETE(lEvt);
 			++iter;
 		}
-        
-        _actionEvents->clear();
-		//SAFE_DELETE(_actionEvents);
+		SAFE_DELETE(_actionEvents);
 	}
 }
 
